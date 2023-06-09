@@ -58,7 +58,7 @@ def parse_json(soup: BeautifulSoup, date: datetime):
 
 
 def get_json():
-    date_tomorrow = (datetime.now() + timedelta(days=2))
+    date_tomorrow = (datetime.now() + timedelta(days=1))
     date_to_str = date_tomorrow.strftime("%d.%m.%Y")
     get_hdata_url = f"index.php/PXS/get_pxs_hdata/{date_to_str}/DAM/2"
 
