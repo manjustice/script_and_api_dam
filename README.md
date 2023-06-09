@@ -10,4 +10,4 @@ docker run -p 8000:8000 -t $(docker build -q .)
 
 ## Endpoint
 
-http://127.0.0.1/api/rdn-closure?date=<YOUR DATE>
+http://127.0.0.1:8000/api/rdn-closure?date=<YOUR DATE>
