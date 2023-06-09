@@ -21,10 +21,9 @@ class Main(Resource):
         for pattern in date_patterns:
             try:
                 valid_date = datetime.strptime(date_str, pattern).date()
+                break
             except ValueError:
                 pass
-            else:
-                break
 
         if valid_date is None:
             return {

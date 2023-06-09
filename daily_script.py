@@ -1,9 +1,10 @@
 from urllib.parse import urljoin
 
-import requests
-from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+import requests
 import schedule
+from sqlalchemy import exists
 import time
 
 from config import db, app
@@ -31,11 +32,13 @@ def parse_json(soup: BeautifulSoup, date: datetime):
         get_json()
 
     with app.app_context():
-        existing_date = Date.query.filter_by(
-            date_value=date.strftime("%Y-%m-%d")
-        ).first()
+        date_exists = (
+            db.session.query(
+                exists().where(Date.date_value == date.strftime("%Y-%m-%d"))
+            ).scalar()
+        )
 
-    if existing_date:
+    if date_exists:
         print("This date already exists.")
         return
 
